@@ -1,0 +1,4 @@
+test
+https://milvus.io/docs/ru/roadmap.md
+https://docs.spring.io/spring-ai/reference/api/vectordbs/milvus.html
+https://docs.spring.io/spring-ai/reference/api/chatclient.html
