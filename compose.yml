@@ -20,6 +20,8 @@ services:
             interval: 30s
             timeout: 20s
             retries: 3
+        networks:
+            - ${GLOBAL_NETWORK:-service}
 
     minio:
         container_name: milvus-minio
@@ -38,6 +40,8 @@ services:
             interval: 30s
             timeout: 20s
             retries: 3
+        networks:
+            - ${GLOBAL_NETWORK:-service}
 
     standalone:
         container_name: milvus-standalone
@@ -62,7 +66,23 @@ services:
         depends_on:
             - "etcd"
             - "minio"
+        networks:
+            - ${GLOBAL_NETWORK:-service}
+
+    rag-service:
+        image: anatolydudko/spring-ai-with-openai-and-milvus-in-action:3.4.3-M6
+        container_name: rag-service
+        ports:
+            - "8080:8080"
+        environment:
+            SPRING_AI_VECTORSTORE_MILVUS_CLIENT_HOST: standalone
+            OPENAI_API_KEY: ${OPENAI_API_KEY}
+        depends_on:
+            standalone:
+                condition: service_healthy
+        networks:
+            - ${GLOBAL_NETWORK:-service}
 
 networks:
-    default:
-        name: milvus
+    service:
+        driver: bridge
