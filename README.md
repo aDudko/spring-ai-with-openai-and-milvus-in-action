@@ -41,20 +41,12 @@ spring-ai-with-openai-and-milvus-in-action/
 |   |   ├── application.yml         # configs
 ├── compose.yml                     # docker-compose file
 ├── pom.xml                         # artifact of Maven
-├── postman_collection.json         # # collection of requests for Postman
+├── postman_collection.json         # collection of requests for Postman
 ```
 
 ## How to try this project?
 
 ❗Don't forget to set the `OPENAI_API_KEY` environment variable before running the application.
-
-### Build Docker-image (optional)
-
-```sh
-mvn clean install
-```
-
-### Start Application
 
 ```sh
 docker-compose -f compose.yml up
